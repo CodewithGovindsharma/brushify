@@ -1,0 +1,224 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brushify</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f4f8;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #405d80;
+            font-size: 32px;
+        }
+
+        #box {
+            height: 300px;
+            width: 300px;
+            border: 1px solid #888;
+            border-radius: 8px;
+            box-shadow: 2px 3px 5px #ccc;
+            display: block;
+            text-align: left;
+            font-size: 20px;
+            background-color: white;
+            padding: 10px;
+            overflow: auto;
+            outline: none;
+        }
+
+        #dwd-btn {
+            height: 35px;
+            width: 100px;
+            font-size: 18px;
+            color: white;
+            background-color: cornflowerblue;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #dwd-btn:hover {
+            background-color: royalblue;
+        }
+
+        #second {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        #bg-color,
+        #text-color,
+        #fonts {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 12px;
+        }
+
+        h2 {
+            font-size: 17px;
+            color: #444;
+        }
+
+        #bg-color button,
+        #text-color button {
+            height: 35px;
+            width: 35px;
+            border-radius: 50%;
+            border: 1px solid #aaa;
+            cursor: pointer;
+            margin: 2px;
+        }
+
+        #fonts button {
+            height: 40px;
+            width: 120px;
+            font-size: 18px;
+            background-color: #f5f6fa;
+            border: 1px solid #bbb;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 3px;
+        }
+
+        #fonts button:hover {
+            background-color: #e5eaf2;
+        }
+
+        @media(max-width: 750px) {
+            #second {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <center>
+
+        <h1>Brushify</h1>
+
+        <div id="box" contenteditable="true" role="textbox"
+             aria-label="Brushify text editor"></div>
+
+        <br><br>
+
+        <button id="dwd-btn">Download</button>
+
+        <br><br>
+
+        <div id="second">
+
+            <div id="bg-color">
+                <h2>Choose your background color</h2>
+
+                <button type="button" onclick="changeBackgroundColor('red')" aria-label="Red background" style="background-color:red;"></button>
+                <button type="button" onclick="changeBackgroundColor('green')" aria-label="Green background" style="background-color:green;"></button>
+                <button type="button" onclick="changeBackgroundColor('rgb(87,87,110)')" aria-label="Dark blue background" style="background-color:rgb(87,87,110);"></button>
+                <button type="button" onclick="changeBackgroundColor('yellow')" aria-label="Yellow background" style="background-color:yellow;"></button>
+                <button type="button" onclick="changeBackgroundColor('rgb(159,130,159)')" aria-label="Mauve background" style="background-color:rgb(159,130,159);"></button>
+                <button type="button" onclick="changeBackgroundColor('rgb(88,46,53)')" aria-label="Dark red background" style="background-color:rgb(88,46,53);"></button>
+                <button type="button" onclick="changeBackgroundColor('rgb(63,56,42)')" aria-label="Brown background" style="background-color:rgb(63,56,42);"></button>
+                <button type="button" onclick="changeBackgroundColor('aliceblue')" aria-label="Alice blue background" style="background-color:aliceblue;"></button>
+                <button type="button" onclick="changeBackgroundColor('gray')" aria-label="Gray background" style="background-color:gray;"></button>
+                <button type="button" onclick="changeBackgroundColor('aquamarine')" aria-label="Aquamarine background" style="background-color:aquamarine;"></button>
+            </div>
+
+            <div id="text-color">
+                <h2>Choose your text color</h2>
+
+                <button type="button" onclick="changeTextColor('red')" aria-label="Red text" style="background-color:red;"></button>
+                <button type="button" onclick="changeTextColor('green')" aria-label="Green text" style="background-color:green;"></button>
+                <button type="button" onclick="changeTextColor('blue')" aria-label="Blue text" style="background-color:blue;"></button>
+                <button type="button" onclick="changeTextColor('yellow')" aria-label="Yellow text" style="background-color:yellow;"></button>
+                <button type="button" onclick="changeTextColor('purple')" aria-label="Purple text" style="background-color:purple;"></button>
+                <button type="button" onclick="changeTextColor('pink')" aria-label="Pink text" style="background-color:pink;"></button>
+                <button type="button" onclick="changeTextColor('orange')" aria-label="Orange text" style="background-color:orange;"></button>
+                <button type="button" onclick="changeTextColor('black')" aria-label="Black text" style="background-color:black;"></button>
+                <button type="button" onclick="changeTextColor('gray')" aria-label="Gray text" style="background-color:gray;"></button>
+                <button type="button" onclick="changeTextColor('white')" aria-label="White text" style="background-color:white;"></button>
+            </div>
+
+            <div id="fonts">
+                <h2>Choose your font style</h2>
+
+                <button type="button" onclick="changeFontFamily('cursive')">Cursive</button>
+                <button type="button" onclick="changeFontFamily('serif')">Serif</button>
+                <button type="button" onclick="changeFontFamily('sans-serif')">Sans</button>
+                <button type="button" onclick="changeFontFamily('Tahoma')">Tahoma</button>
+                <button type="button" onclick="changeFontFamily('Georgia')">Georgia</button>
+            </div>
+
+        </div>
+
+    </center>
+
+    <script>
+
+        const box = document.getElementById("box");
+
+        function changeBackgroundColor(color) {
+            box.style.backgroundColor = color;
+        }
+
+        function changeTextColor(color) {
+            box.style.color = color;
+        }
+
+        function changeFontFamily(font) {
+            box.style.fontFamily = font;
+        }
+
+        document.getElementById("dwd-btn").addEventListener("click", function() {
+
+            let content = `<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>My Brushify Creation</title>
+</head>
+<body>
+    <div style="
+        background-color: ${box.style.backgroundColor || 'white'};
+        color: ${box.style.color || 'black'};
+        font-family: ${box.style.fontFamily || 'Arial'};
+        padding: 20px;
+        min-height: 300px;
+        font-size: 20px;
+    ">${box.innerHTML}</div>
+</body>
+</html>`;
+
+            let file = new Blob([content], {type: "text/html"});
+            let url = URL.createObjectURL(file);
+
+            let link = document.createElement("a");
+            link.href = url;
+            link.download = "Brushify.html";
+
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+
+            setTimeout(function() {
+                URL.revokeObjectURL(url);
+            }, 1000);
+
+        });
+
+    </script>
+
+</body>
+</html>
